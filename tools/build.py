@@ -571,6 +571,7 @@ class BuildObject(object):
 
   def execute_with_error(self, command, env=None, cwd=None):
     env = env or os.environ.copy()
+    env["PATH"] = self.depot_tools_path + ":" + env["PATH"]
     print('Running: %s' % (' '.join(pipes.quote(x) for x in command)))
 
     job = subprocess.Popen(command, env=env, cwd=cwd)
@@ -579,6 +580,8 @@ class BuildObject(object):
 
   def execute(self, command, env=None, cwd=None):
     """execute shell command"""
+    env = env or os.environ.copy()
+    env["PATH"] = self.depot_tools_path + ":" + env["PATH"]
     res = self.execute_with_error(command, env=env, cwd=cwd)
     if bool(res) == True:
       return
