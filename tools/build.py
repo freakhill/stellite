@@ -71,6 +71,7 @@ target_os_only = \"True\"
 """
 
 GN_ARGS_LINUX = """
+use_kerberos = false
 disable_file_support = true
 disable_ftp_support = true
 is_component_build = false
