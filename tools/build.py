@@ -576,7 +576,10 @@ class BuildObject(object):
     print('Running: %s' % (' '.join(pipes.quote(x) for x in command)))
 
     job = subprocess.Popen(command, env=env, cwd=cwd)
-    return job.wait() == 0
+    res = job.wait()
+    print('Return code: %s' % res)
+
+    return res == 0
 
 
   def execute(self, command, env=None, cwd=None):
